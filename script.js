@@ -28,7 +28,6 @@ function newTodo() {
 
   tod = prompt("New todo:")
   var er = new Todo(tod, newValue)
-  console.log(er.id)
 
 
   var todoli = document.createElement('li')
@@ -37,26 +36,39 @@ function newTodo() {
 
   var btn = document.createElement('button')
   btn.innerHTML = "delete"
-  console.log(btn)
+  btn.setAttribute('id', newValue)
+  btn.setAttribute('onclick', 'del(this.id)')
 
 
   var checkboxInput = document.createElement('input')
   checkboxInput.setAttribute('type', 'checkbox')
   checkboxInput.setAttribute('onclick', 'countUnCheck()')
-  checkboxInput.setAttribute('id', newValue)
   checkboxInput.classList.add(classNames.TODO_CHECKBOX)
   checkboxInput.checked = false
   
   list.insertBefore(todoli, list.firstChild)
   
   var td = document.getElementsByTagName("li")[0]
-  td.innerHTML = er.tordo
+  td.innerHTML = '<p>' + er.tordo + '</p>'
+  td.setAttribute('id', newValue)
   td.insertBefore(checkboxInput, td.firstChild)
   td.insertBefore(btn, td.firstChild[1])
 
   countUnCheck()
 
 }
+
+
+function del(idButton) {
+  var d = document.getElementById(idButton)
+  d.remove()
+  console.log(d) 
+
+  countUnCheck()
+
+
+}
+
 
 function countUnCheck()
 {
